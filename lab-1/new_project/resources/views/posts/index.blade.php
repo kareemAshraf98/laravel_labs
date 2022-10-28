@@ -12,6 +12,7 @@
       <th scope="col">Title</th>
       <th scope="col">Posted By</th>
       <th scope="col">Created At</th>
+      <th scope="col">Slug</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -26,6 +27,7 @@
             <td>undefined</td>
         @endif
         <td>{{$post->created_at}}</td>
+        <td>{{$post->slug}}</td>
         <td>
             {{-- <a href="{{route('posts.show', $post['id'])}}" class="btn btn-info">View</a> --}}
             <a href="{{route('posts.show', ['post' =>$post['id']])}}" class="btn btn-info">View</a>
@@ -34,26 +36,17 @@
                 @method('DELETE')
                 @csrf
                 <button onclick="return confirm('Do you want to delete this record ?')" class="btn btn-danger">Delete</button>
-                {{-- <script>
-                    function warn(){
-                        var Btn = document.getElementById("btn");
-                        if(Btn == true){
-                            alert("are you sure to delete this record");
-                        }
-                    }
-                </script> --}}
             </form>
         </td>
       </tr>
     @endforeach
-    {{-- <div class="container">
-        @foreach ($posts as $user)
-            {{ $user->name }}
-        @endforeach
-    </div>
-
-    {{ $posts->links() }} --}}
   </tbody>
 </table>
+<div class="mb-3">
+    @foreach ($posts as $user)
+        {{ $user->name }}
+    @endforeach
+</div>
+{{ $posts->links() }}
 
 @endsection

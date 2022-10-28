@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,7 @@ Route::delete('/posts/{post}',[PostController::class, 'destroy'])->name('posts.d
 
 
 // Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -12,18 +12,10 @@ class PostController extends Controller
     //
     public function index()
     {
-        // $allposts = Post::all();
-        // dd($allposts);
-        $allposts= Post::all();
 
-        // $allposts = [
-        //    // ['id' => 1 , 'title' => 'laravel is cool', 'posted_by' => 'Ahmed', 'creation_date' => '2022-10-22'],
-        //   //  ['id' => 2 , 'title' => 'PHP deep dive', 'posted_by' => 'Mohamed', 'creation_date' => '2022-10-15'],
-        // ];
-        // dd($allposts);
+        $allposts= Post::paginate(25,);
         return view('posts.index', [
           'posts' => $allposts,
-            Post::paginate(25)
         ]);
     }
     public function create()
@@ -33,19 +25,13 @@ class PostController extends Controller
 
             'allUsers' => $allUsers
         ]);
+        return redirect()->route('posts.index');
     }
 
     public function show($postId)
     {
-        // $arr = [
-        //     ['id' => 1 , 'title' => 'laravel is cool', 'posted_by' => 'Ahmed', 'creation_date' => '2022-10-22','email'=>'ahmed@gmail.com'],
-        //     ['id' => 2 , 'title' => 'PHP deep dive', 'posted_by' => 'Mohamed', 'creation_date' => '2022-10-15','email'=>'mohammed@gmail.com'],
-        // ];
-        // dd($arr);
-        // $post = Post::find($postId)
-            $arr=POST::find($postId);
-            // dd($arr);
-            // dd($arr[$postId]);
+
+        $arr=POST::find($postId);
         return  view('posts.show',[
             'post' => $arr
         ]);
@@ -53,8 +39,11 @@ class PostController extends Controller
 
     public function store()
     {
+        request()->validate([
+            'title'=> ['required','unique:posts', 'min:3'],
+            'description'=> ['required','min:10']
+        ]);
         $data = request()->all();
-        // dd($data);
         Post::create([
             'title' => request()->title,
             'description' => $data['description'],
@@ -64,9 +53,9 @@ class PostController extends Controller
 
        return redirect()->route('posts.index');
     }
+
     public function edit($view){
         $singlePost = Post::find($view);
-        // dd($view);
         return view('posts.edit',[
             'post'=>$singlePost
         ]);
@@ -81,6 +70,7 @@ class PostController extends Controller
         ]);
         return redirect()->route('posts.index');
     }
+
     public function destroy($post){
         $singlePost = Post::find($post);
         $singlePost->delete();

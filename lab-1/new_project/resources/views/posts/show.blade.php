@@ -18,7 +18,8 @@
     {{-- @dd($post) --}}
     <p class="card-text"><span>Name:</span> {{$post->user->name}}</p>
     <p class="card-text"><span>Email:</span> {{$post->user->email}}</p>
-    <p class="card-text"><span>Created at:</span> {{$post->user->created_at}}</p>
+    <p class="card-text"><span>Created at:</span> {{$post->created_at}}</p>
+
     <a href="{{route('posts.index')}}" class="btn btn-primary">Go back</a>
   </div>
 </div>
