@@ -26,6 +26,7 @@
         @else
             <td>undefined</td>
         @endif
+        {{-- <td>{{\Carbon\Carbon::parse($post['created_at'])->formate('Y-m-d')}}</td> --}}
         <td>{{$post->created_at}}</td>
         <td>{{$post->slug}}</td>
         <td>

@@ -15,12 +15,13 @@
   <h5 class="card-header">Post Creator Info</h5>
   <div class="card-body">
     <h5 class="card-title"></h5>
-    {{-- @dd($post) --}}
+    {{-- @dd($post->user) --}}
     <p class="card-text"><span>Name:</span> {{$post->user->name}}</p>
     <p class="card-text"><span>Email:</span> {{$post->user->email}}</p>
     <p class="card-text"><span>Created at:</span> {{$post->created_at}}</p>
 
     <a href="{{route('posts.index')}}" class="btn btn-primary">Go back</a>
+    <input type="file" name="photo">
   </div>
 </div>
 @endsection

@@ -5,7 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Post;
 use App\Models\User;
+use Faker\Core\Number;
 use Illuminate\Support\Str;
+use Illuminate\Support\number_format;
 
 class PostFactory extends Factory
 {

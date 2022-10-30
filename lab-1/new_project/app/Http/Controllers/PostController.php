@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Jobs\PruneOldPostsJob;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -12,8 +14,8 @@ class PostController extends Controller
     //
     public function index()
     {
-
-        $allposts= Post::paginate(25,);
+        PruneOldPostsJob::dispatch();
+        $allposts= Post::orderBy('created_at','desc')->paginate(15);
         return view('posts.index', [
           'posts' => $allposts,
         ]);
