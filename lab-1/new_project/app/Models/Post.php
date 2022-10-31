@@ -33,4 +33,9 @@ class Post extends Model
         ];
     }
 
+    public function post()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
